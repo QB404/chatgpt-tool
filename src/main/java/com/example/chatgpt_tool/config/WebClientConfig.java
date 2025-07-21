@@ -21,7 +21,7 @@ public class WebClientConfig {
         HttpClient httpClient = HttpClient.create().proxy(proxy -> proxy
                         .type(ProxyProvider.Proxy.HTTP)
                         .host("127.0.0.1")
-                        .port(7890))
+                        .port(7890)).keepAlive(true)
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .responseTimeout(Duration.ofSeconds(10));
 
@@ -29,5 +29,6 @@ public class WebClientConfig {
                 .baseUrl("https://api.openai.com/v1")
                 .clientConnector(new ReactorClientHttpConnector(httpClient)) // 关键，注入配置好的 Netty client
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader("OpenAI-Beta", "assistants=v2")   // 必填
                 .build();
 }}

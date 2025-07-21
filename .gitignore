@@ -34,3 +34,5 @@ build/
 
 #config
 src/main/resources/secret.properties
+### Docker 挂载的 MySQL 数据 ###
+mysql-data/
