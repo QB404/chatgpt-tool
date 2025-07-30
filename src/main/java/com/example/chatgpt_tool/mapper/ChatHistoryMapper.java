@@ -32,4 +32,11 @@ public interface ChatHistoryMapper {
         ORDER BY created_at
     """)
     List<ChatHistory> findByUser(@Param("userId") Long userId);
+    @Select("""
+      SELECT * FROM chat_history
+      WHERE thread_id = #{threadId}
+      ORDER BY created_at DESC
+    """)
+    List<ChatHistory> findByThread(String threadId);
+
 }
